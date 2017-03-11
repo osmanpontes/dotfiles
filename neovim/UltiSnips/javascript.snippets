@@ -1,0 +1,29 @@
+snippet log "console.log" b
+console.log(${1:variable})
+endsnippet
+
+snippet logjson "console.log(JSON.stringify(_, null, 2))" i
+console.log(JSON.stringify(${1:object}, null, 2))
+endsnippet
+
+snippet newpromise "new Promise((resolve, reject) => _)" i
+new Promise((resolve, reject) => {
+	$1
+})
+endsnippet
+
+snippet afun "(_) => {_}" i
+($1) => {
+	$2
+}
+endsnippet
+
+snippet afunr "(_) => _" i
+($1) => $2
+endsnippet
+
+snippet gen "function * () {_}" b
+function * ($1) {
+	$2
+}
+endsnippet
