@@ -1,3 +1,7 @@
+if &shell =~# 'fish$'
+    set shell=sh
+endif
+
 call plug#begin()
 Plug 'tpope/vim-sensible'
 
@@ -15,6 +19,9 @@ Plug 'tpope/vim-surround'
 " Search Text <C-F>
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+
+" Lean & mean status/tabline for vim that's light as air
+Plug 'vim-airline/vim-airline'
 
 " Theme
 Plug 'morhetz/gruvbox'
@@ -50,6 +57,7 @@ set path+=**
 set number
 set relativenumber
 set ignorecase
+set mouse=a
 
 " Tabs
 set expandtab tabstop=4 shiftwidth=4 softtabstop=4
@@ -57,17 +65,21 @@ autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabsto
 autocmd Filetype json setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
-if &shell =~# 'fish$'
-    set shell=sh
-endif
-
 " Mappings
 let mapleader = "\<space>"
 inoremap jk <esc>
 
-nnoremap <leader>l :tabnext<cr>
-nnoremap <leader>h :tabprevious<cr>
+" Tabs
+nnoremap <leader>h :tabnext<cr>
+nnoremap <leader>l :tabprevious<cr>
 nnoremap <leader>t :tabnew<cr>
+nnoremap <leader>q :tabclose<cr>
+
+" Buffers
+nnoremap <leader>b :Buffers<cr>
+nnoremap <leader>j :bprevious<cr>
+nnoremap <leader>k :bnext<cr>
+nnoremap <leader>u :bp <bar> bd #<cr>
 
 nnoremap <leader>n :NERDTreeToggle<cr>
 
@@ -92,7 +104,7 @@ tnoremap <esc> <c-\><c-n>
 command! SourceInstall edit ~/.config/nvim/init.vim | write | source % | PlugInstall
 
 " Ignore these folders 
-set wildignore+=**/node_modules/**/*
+set wildignore+=*/node_modules/*
 
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -111,3 +123,9 @@ let g:jsx_ext_required = 0
 
 " NERDTree
 let NERDTreeShowHidden=1
+
+" Airline
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+let g:airline_powerline_fonts = 1
+

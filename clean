@@ -1,14 +1,22 @@
 #!/bin/sh
 chsh -s $(which bash)
+# Clean tmux
 rm ~/.tmux.conf
+# Clean neovim
 rm ~/.config/nvim
 rm -rf ~/.config/nvim/
+# Clen fish
 rm ~/.config/fish
 rm -rf ~/.config/fish/
 rm -rf ~/.config/omf
 rm -rf ~/.local/share/omf
+# Clean nvm
+rm -rf $NVM_DIR
+
 yaourt -Rs fish --noconfirm
 yaourt -Rs python-pip --noconfirm
 yaourt -Rs neovim --noconfirm
 yaourt -Rs tmux --noconfirm
+yaourt -Rs the_silver_searcher --noconfirm
+yaourt -Rs pgcli --noconfirm
 

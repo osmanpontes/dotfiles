@@ -3,9 +3,14 @@
 # Exit immediately if a command exits with a non-zero status
 set -e
 
-echo "######################"
-echo "#        Git         #"
-echo "######################"
+function title {
+    echo '################################################################################'
+    echo '                         '$1
+    echo '################################################################################'
+
+}
+
+title git
 
 if which git ; then
     # Remove current .gitconfig
@@ -14,17 +19,29 @@ if which git ; then
     ln -sv ~/.dotfiles/git/.gitconfig ~/.gitconfig
 fi
 
-echo "######################"
-echo "#       Python       #"
-echo "######################"
+title python
 
 if ! which pip ; then
     yaourt -S python-pip --noconfirm
 fi
 
-echo "######################"
-echo "#       Neovim       #"
-echo "######################"
+title the_silver_searcher
+
+if ! which ag ; then
+    if which yaourt ; then
+        yaourt -S the_silver_searcher --noconfirm
+    fi
+fi
+
+title pgcli
+
+if ! which pgcli ; then
+    if which yaourt ; then
+        yaourt -S pgcli --noconfirm
+    fi
+fi
+
+title neovim
 
 if ! which nvim ; then
     # Symlink
@@ -44,9 +61,7 @@ if ! which nvim ; then
     nvim -c SourceInstall
 fi
 
-echo "######################"
-echo "#        tmux        #"
-echo "######################"
+title tmux
 
 if ! which tmux ; then
     # Symlink
@@ -58,9 +73,11 @@ if ! which tmux ; then
     fi
 fi
 
-echo "######################"
-echo "#        Fish        #"
-echo "######################"
+title nvm
+
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+
+title fish
 
 if ! which fish ; then
     # Symlink
@@ -78,6 +95,8 @@ else
     fish -c 'omf theme shellder'
     fish -c 'omf install fonts'
     fish -c 'fonts install --powerline Inconsolata'
+    # Install nvm plugin
+    fish -c 'omf install nvm'
     # Set fish as default shell
     chsh -s $(which fish)
 fi
