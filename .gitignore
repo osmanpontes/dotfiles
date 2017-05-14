@@ -1,3 +1,9 @@
 neovim/autoload
 neovim/plugged
 
+wget-log*
+
+fish/conf.d/
+fish/fishd.localhost.localdomain
+fish/functions/
+

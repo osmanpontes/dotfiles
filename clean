@@ -1,0 +1,14 @@
+#!/bin/sh
+chsh -s $(which bash)
+rm ~/.tmux.conf
+rm ~/.config/nvim
+rm -rf ~/.config/nvim/
+rm ~/.config/fish
+rm -rf ~/.config/fish/
+rm -rf ~/.config/omf
+rm -rf ~/.local/share/omf
+yaourt -Rs fish --noconfirm
+yaourt -Rs python-pip --noconfirm
+yaourt -Rs neovim --noconfirm
+yaourt -Rs tmux --noconfirm
+

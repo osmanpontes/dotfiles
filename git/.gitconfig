@@ -1,0 +1,8 @@
+[user]
+	email = osmanpontes@gmail.com
+	name = Osman Pontes
+[alias]
+	lo = log --graph --format=oneline --abbrev-commit
+	loa = !git lo --all
+	lol = log --graph --format='%C(auto)%h%d %s%Creset %Cgreen(%cr)%Creset %C(cyan)<%an>%Creset'
+	lola = !git lol --all
