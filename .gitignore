@@ -7,4 +7,5 @@ wget-log*
 fish/conf.d/
 fish/fishd.*
 fish/functions/
+fish/private.fish
 
