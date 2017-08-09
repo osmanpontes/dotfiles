@@ -5,6 +5,6 @@ neovim/.netrwhist
 wget-log*
 
 fish/conf.d/
-fish/fishd.localhost.localdomain
+fish/fishd.*
 fish/functions/
 
