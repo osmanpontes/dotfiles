@@ -13,10 +13,29 @@ rm -rf ~/.local/share/omf
 # Clean nvm
 rm -rf $NVM_DIR
 
-yaourt -Rs fish --noconfirm
-yaourt -Rs python-pip --noconfirm
-yaourt -Rs neovim --noconfirm
-yaourt -Rs tmux --noconfirm
-yaourt -Rs the_silver_searcher --noconfirm
-yaourt -Rs pgcli --noconfirm
+if which yaourt ; then
+    yaourt -Rs fish --noconfirm
+    yaourt -Rs neovim --noconfirm
+    yaourt -Rs tmux --noconfirm
+    yaourt -Rs the_silver_searcher --noconfirm
+    yaourt -Rs pgcli --noconfirm
+    yaourt -Rs python-pip --noconfirm
+fi
+
+if which apt-get ; then
+    alias pip='pip3'
+    # apt-get remove --auto-remove fish
+    # apt-get purge fish
+    apt-get purge --auto-remove fish
+    apt-get purge --auto-remove neovim
+    apt-get purge --auto-remove tmux
+    apt-get purge --auto-remove silversearcher-ag
+    # pgcli
+    apt-get purge --auto-remove libpq-dev
+    apt-get purge --auto-remove python-dev
+    pip uninstall pgcli
+    # python
+    apt-get purge --auto-remove python-dev python-pip python3-dev python3-pip
+fi
+
 
