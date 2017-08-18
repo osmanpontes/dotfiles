@@ -110,6 +110,11 @@ title nvm
 
 curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
 
+title docker
+
+curl -sSL https://get.docker.com/ | sh
+usermod -aG docker $USER
+
 title fish
 
 if ! which fish ; then
