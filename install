@@ -115,6 +115,12 @@ title docker
 curl -sSL https://get.docker.com/ | sh
 usermod -aG docker $USER
 
+title docker-compose
+
+curl -L https://github.com/docker/compose/releases/download/1.15.0/docker-compose-`uname -s`-`uname -m` > ~/docker-compose
+chmod +x ~/docker-compose
+mv ~/docker-compose /usr/local/bin/docker-compose
+
 title fish
 
 if ! which fish ; then
