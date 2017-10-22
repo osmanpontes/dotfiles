@@ -12,5 +12,5 @@ set -xg EDITOR $VISUAL
 set -xg FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -g ""'
 
 # awscli and others
-set -gx PATH ~/.local/bin $PATH
+# set -gx PATH ~/.local/bin $PATH
 
