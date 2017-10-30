@@ -99,10 +99,20 @@ if ! which tmux ; then
     # Install tmux
     if which yaourt ; then
         yaourt -S tmux --noconfirm
+        yaourt -S xsel --noconfirm
     fi
 
     if which apt-get ; then
         apt-get install tmux
+    fi
+fi
+
+title openvpn
+
+if ! which openvpn ; then
+    if which yaourt ; then
+        yaourt -S openvpn --noconfirm
+        yaourt -S openvpn-update-resolv-conf --noconfirm
     fi
 fi
 
