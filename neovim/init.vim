@@ -20,6 +20,9 @@ Plug 'tpope/vim-surround'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
+" Find and Replace
+Plug 'brooth/far.vim'
+
 " Lean & mean status/tabline for vim that's light as air
 Plug 'vim-airline/vim-airline'
 
