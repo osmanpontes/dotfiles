@@ -73,8 +73,8 @@ let mapleader = "\<space>"
 inoremap jk <esc>
 
 " Tabs
-nnoremap <leader>h :tabnext<cr>
-nnoremap <leader>l :tabprevious<cr>
+nnoremap <leader>l :tabnext<cr>
+nnoremap <leader>h :tabprevious<cr>
 nnoremap <leader>t :tabnew<cr>
 nnoremap <leader>q :tabclose<cr>
 
