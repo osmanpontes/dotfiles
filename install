@@ -30,8 +30,8 @@ fi
 title python
 
 if ! which pip ; then
-    if which yaourt ; then
-        yaourt -S python-pip --noconfirm
+    if which yay ; then
+        yay -S python-pip --noconfirm
     fi
 
     if which apt-get ; then
@@ -44,8 +44,8 @@ fi
 title the_silver_searcher
 
 if ! which ag ; then
-    if which yaourt ; then
-        yaourt -S the_silver_searcher --noconfirm
+    if which yay ; then
+        yay -S the_silver_searcher --noconfirm
     fi
 
     if which apt-get ; then
@@ -56,8 +56,8 @@ fi
 title pgcli
 
 if ! which pgcli ; then
-    if which yaourt ; then
-        yaourt -S pgcli --noconfirm
+    if which yay ; then
+        yay -S pgcli --noconfirm
     fi
 
     if which apt-get ; then
@@ -73,9 +73,8 @@ if ! which nvim ; then
     ln -sv ~/.dotfiles/neovim/ ~/.config/nvim
 
     # Install Neovim
-    pip install neovim
-    if which yaourt ; then
-        yaourt -S neovim --noconfirm
+    if which yay ; then
+        yay -S neovim --noconfirm
     fi
 
     if which apt-get ; then
@@ -97,9 +96,9 @@ if ! which tmux ; then
     ln -sv ~/.dotfiles/tmux/.tmux.conf ~/.tmux.conf
 
     # Install tmux
-    if which yaourt ; then
-        yaourt -S tmux --noconfirm
-        yaourt -S xsel --noconfirm
+    if which yay ; then
+        yay -S tmux --noconfirm
+        yay -S xsel --noconfirm
     fi
 
     if which apt-get ; then
@@ -110,9 +109,9 @@ fi
 title openvpn
 
 if ! which openvpn ; then
-    if which yaourt ; then
-        yaourt -S openvpn --noconfirm
-        yaourt -S openvpn-update-resolv-conf --noconfirm
+    if which yay ; then
+        yay -S openvpn --noconfirm
+        yay -S openvpn-update-resolv-conf --noconfirm
     fi
 fi
 
@@ -137,8 +136,8 @@ if ! which fish ; then
     # Symlink
     ln -sv ~/.dotfiles/fish/ ~/.config/fish
     # Install fish
-    if which yaourt ; then
-        yaourt -S fish --noconfirm
+    if which yay ; then
+        yay -S fish --noconfirm
     fi
 
     if which apt-get ; then

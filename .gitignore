@@ -1,6 +1,7 @@
 neovim/autoload
 neovim/plugged
 neovim/.netrwhist
+neovim/neovim
 
 wget-log*
 
@@ -8,4 +9,5 @@ fish/conf.d/
 fish/fishd.*
 fish/functions/
 fish/private.fish
+fish/fish_variables
 

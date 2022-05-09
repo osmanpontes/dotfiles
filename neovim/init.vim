@@ -3,14 +3,26 @@ if &shell =~# 'fish$'
 endif
 
 call plug#begin()
+
 Plug 'tpope/vim-sensible'
 
-Plug 'scrooloose/nerdtree'
+" Syntax
 Plug 'sheerun/vim-polyglot'
+" Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Lint Engine
+Plug 'dense-analysis/ale'
+
+Plug 'scrooloose/nerdtree'
 Plug 'cohama/lexima.vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
+
+" Auto complete
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+" Substitute keeping original case
+Plug 'tpope/vim-abolish'
 
 " S to surround code inside visual mode
 Plug 'tpope/vim-surround'
@@ -18,6 +30,7 @@ Plug 'tpope/vim-surround'
 " Search Files <C-P>
 " Search Text <C-F>
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
 " Find and Replace
@@ -41,13 +54,19 @@ Plug 'honza/vim-snippets'
 " Multiple cursors
 Plug 'terryma/vim-multiple-cursors'
 
-" Lint Engine
-Plug 'w0rp/ale'
+" Show git information
+Plug 'airblade/vim-gitgutter'
+
+" Emmet
+Plug 'mattn/emmet-vim'
 
 " Extend text objects
 Plug 'kana/vim-textobj-user'
 Plug 'kana/vim-textobj-function'
 Plug 'thinca/vim-textobj-function-javascript'
+
+" Icons
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " Colorscheme
@@ -60,7 +79,11 @@ set path+=**
 set number
 set relativenumber
 set ignorecase
+set smartcase
 set mouse=a
+" Neovim default is 'set autoread'
+" set autoread
+" set noautoread
 
 " Tabs
 set expandtab tabstop=4 shiftwidth=4 softtabstop=4
@@ -84,20 +107,42 @@ nnoremap <leader>j :bprevious<cr>
 nnoremap <leader>k :bnext<cr>
 nnoremap <leader>u :bp <bar> bd #<cr>
 
+" NERDTree
 nnoremap <leader>n :NERDTreeToggle<cr>
+nnoremap <leader>m :ALENext<cr>
 
+" GitGutter
+nnoremap <leader>gg :GitGutter<cr>
+nnoremap <leader>gn :GitGutterNextHunk<cr>
+
+" Vim source files
 nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 
+" Search
 nnoremap <leader>a :execute "Ag" expand("<cword>")<cr>
 nnoremap <C-P> :Files<cr>
 nnoremap <C-F> :Ag<space>
 
+" Change panes
 nnoremap <C-J> <C-W>j
 nnoremap <C-K> <C-W>k
 nnoremap <C-H> <C-W>h
 nnoremap <C-L> <C-W>l
 
+" Move lines
+nnoremap <C-A-j> :m .+1<CR>==
+nnoremap <C-A-k> :m .-2<CR>==
+inoremap <C-A-j> <Esc>:m .+1<CR>==gi
+inoremap <C-A-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-A-j> :m '>+1<CR>gv=gv
+vnoremap <C-A-k> :m '<-2<CR>gv=gv
+
+" Copy file path to clipboard
+nmap <leader>f :let @+ = @%<cr>
+nmap <leader>ff :let @+ = expand("%:p")<cr>
+
+" Save file
 nnoremap <C-S> :w<cr>
 
 inoremap <C-@> <C-P>
@@ -126,9 +171,26 @@ let g:jsx_ext_required = 0
 
 " NERDTree
 let NERDTreeShowHidden=1
+" Ignored files in NERDTree
+let NERDTreeIgnore=['\.pyc$']
+
+" ALE
+let g:ale_fixers = {
+\   'javascript': ['prettier'],
+\   'css': ['prettier'],
+\   'json': ['prettier'],
+\}
+let g:ale_linters = {
+\   'javascript': ['eslint'],
+\   'sh': ['bashate'],
+\}
+let g:ale_linters_explicit = 1
+let g:ale_fix_on_save = 1
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts = 1
 
+" Configure list
+set listchars=tab:→\ ,trail:␣,extends:…,eol:⏎

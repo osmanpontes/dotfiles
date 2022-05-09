@@ -12,18 +12,28 @@ new Promise((resolve, reject) => {
 })
 endsnippet
 
-snippet afun "(_) => {_}" i
+snippet af "(_) => _" i
+($1) => $2
+endsnippet
+
+snippet aff "(_) => {_}" i
 ($1) => {
 	$2
 }
 endsnippet
 
-snippet afunr "(_) => _" i
-($1) => $2
+snippet afr "(_) => (_)" i
+($1) => (
+	$2
+)
 endsnippet
 
 snippet gen "function * () {_}" b
 function * ($1) {
 	$2
 }
+endsnippet
+
+snippet tag "<tag></tag>" i
+<$1>$2</$1>
 endsnippet

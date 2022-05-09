@@ -5,4 +5,9 @@
 	lo = log --graph --format=oneline --abbrev-commit
 	loa = !git lo --all
 	lol = log --graph --format='%C(auto)%h%d %s%Creset %Cgreen(%cr)%Creset %C(cyan)<%an>%Creset'
+	lold = log --graph --format='%C(auto)%h%d %s%Creset %Cgreen(%ai)%Creset %C(cyan)<%an>%Creset'
+	lolauthor = log --graph --format='%C(auto)%h%d %s%Creset %Cgreen(%cr)%Creset %Cblue(%ar)%Creset %C(cyan)<%an>%Creset'
 	lola = !git lol --all
+	lolad = !git lold --all
+	logp = log -p -M --stat --
+	logpr = log -p -M --follow --stat --
