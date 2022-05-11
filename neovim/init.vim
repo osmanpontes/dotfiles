@@ -14,7 +14,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'ap/vim-css-color'
 
 " Lint Engine
-Plug 'dense-analysis/ale'
+" Plug 'dense-analysis/ale'
 
 Plug 'scrooloose/nerdtree'
 Plug 'cohama/lexima.vim'
@@ -22,7 +22,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
 
 " Auto complete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Substitute keeping original case
 Plug 'tpope/vim-abolish'
@@ -113,9 +114,89 @@ nnoremap <leader>j :bprevious<cr>
 nnoremap <leader>k :bnext<cr>
 nnoremap <leader>u :bp <bar> bd #<cr>
 
+" CoC extensions
+let g:coc_global_extensions = [
+\  'coc-vimlsp',
+\  'coc-highlight',
+\  'coc-lists',
+\  'coc-snippets',
+\  'coc-json',
+\  'coc-xml',
+\  'coc-yaml',
+\  'coc-toml',
+\  'coc-html',
+\  'coc-css',
+\  'coc-markdownlint',
+\  'coc-sh',
+\  'coc-sql',
+\  'coc-pyright',
+\  'coc-rust-analyzer',
+\  'coc-tsserver',
+\  'coc-eslint',
+\  'coc-prettier'
+\]
+
+" CoC config
+nmap <silent> <leader>M <Plug>(coc-diagnostic-prev)
+nmap <silent> <leader>m <Plug>(coc-diagnostic-next)
+nmap <silent> <leader>gd <Plug>(coc-definition)
+nmap <silent> <leader>gy <Plug>(coc-type-definition)
+nmap <silent> <leader>gi <Plug>(coc-implementation)
+nmap <silent> <leader>gr <Plug>(coc-references)
+
+nnoremap <silent> K :call ShowDocumentation()<CR>
+
+function! ShowDocumentation()
+  if CocAction('hasProvider', 'hover')
+    call CocActionAsync('doHover')
+  else
+    call feedkeys('K', 'in')
+  endif
+endfunction
+
+" Highlight the symbol and its references when holding the cursor
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Make <CR> to accept selected completion item or notify coc.nvim to format
+" <C-g>u breaks current undo, please make your own choice
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+" inoremap <silent><expr> <TAB>
+"       \ coc#pum#visible() ? coc#_select_confirm() :
+"       \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+"       \ CheckBackspace() ? "\<TAB>" :
+"       \ coc#refresh()
+" let g:coc_snippet_next = '<tab>'
+
+function! CheckBackspace() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion
+if has('nvim')
+  inoremap <silent><expr> <c-space> coc#refresh()
+else
+  inoremap <silent><expr> <c-@> coc#refresh()
+endif
+
+" Remap keys for applying code actions at the cursor position
+nmap <leader>cac <Plug>(coc-codeaction-cursor)
+" Remap keys for apply code actions affect whole buffer
+nmap <leader>cas <Plug>(coc-codeaction-source)
+" Apply the most preferred quickfix action to fix diagnostic on the current line
+nmap <leader>cqf <Plug>(coc-fix-current)
+" Symbol renaming
+nmap <leader>rn <Plug>(coc-rename)
+" Remap keys for applying refactor code actions
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+" Run the Code Lens action on the current line
+" codelens not working yet
+" nmap <leader>cl <Plug>(coc-codelens-action)
+
 " NERDTree
 nnoremap <leader>n :NERDTreeToggle<cr>
-nnoremap <leader>m :ALENext<cr>
+" nnoremap <leader>m :ALENext<cr>
 
 " GitGutter
 nnoremap <leader>gg :GitGutter<cr>
@@ -200,19 +281,19 @@ let NERDTreeShowHidden=1
 let NERDTreeIgnore=['\.pyc$']
 
 " ALE
-let g:ale_fixers = {
-\   'javascript': ['prettier'],
-\   'css': ['prettier'],
-\   'json': ['prettier'],
-\   'rust': ['rustfmt'],
-\}
-let g:ale_linters = {
-\   'javascript': ['eslint'],
-\   'sh': ['bashate'],
-\   'rust': ['cargo'],
-\}
-let g:ale_linters_explicit = 0
-let g:ale_fix_on_save = 1
+" let g:ale_fixers = {
+" \   'javascript': ['prettier'],
+" \   'css': ['prettier'],
+" \   'json': ['prettier'],
+" \   'rust': ['rustfmt'],
+" \}
+" let g:ale_linters = {
+" \   'javascript': ['eslint'],
+" \   'sh': ['bashate'],
+" \   'rust': ['cargo'],
+" \}
+" let g:ale_linters_explicit = 0
+" let g:ale_fix_on_save = 1
 
 " Airline
 let g:airline#extensions#tabline#enabled = 1

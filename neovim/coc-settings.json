@@ -1,0 +1,13 @@
+{
+  "coc.preferences.formatOnSave": true,
+  "suggest.noselect": true,
+  "diagnostic.virtualText": true,
+  "codeLens.enable": true,
+  "sql.database": "postgresql",
+  "sql.formatOptions": {
+    "language": "postgresql",
+    "keywordCase": "upper",
+    "newlineBeforeSemicolon": true
+  },
+  "javascript.suggestionActions.enabled": false
+}
