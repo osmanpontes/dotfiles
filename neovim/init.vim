@@ -201,12 +201,14 @@ let g:ale_fixers = {
 \   'javascript': ['prettier'],
 \   'css': ['prettier'],
 \   'json': ['prettier'],
+\   'rust': ['rustfmt'],
 \}
 let g:ale_linters = {
 \   'javascript': ['eslint'],
 \   'sh': ['bashate'],
+\   'rust': ['cargo'],
 \}
-let g:ale_linters_explicit = 1
+let g:ale_linters_explicit = 0
 let g:ale_fix_on_save = 1
 
 " Airline
