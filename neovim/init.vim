@@ -10,6 +10,9 @@ Plug 'tpope/vim-sensible'
 Plug 'sheerun/vim-polyglot'
 " Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
+" Show color preview in CSS file
+Plug 'ap/vim-css-color'
+
 " Lint Engine
 Plug 'dense-analysis/ale'
 
