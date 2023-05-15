@@ -11,3 +11,5 @@
 	lolad = !git lold --all
 	logp = log -p -M --stat --
 	logpr = log -p -M --follow --stat --
+[init]
+	defaultBranch = main
