@@ -24,6 +24,9 @@ Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 " Substitute keeping original case
 Plug 'tpope/vim-abolish'
 
+" Debugger
+Plug 'puremourning/vimspector'
+
 " S to surround code inside visual mode
 Plug 'tpope/vim-surround'
 
@@ -137,6 +140,25 @@ inoremap <C-A-j> <Esc>:m .+1<CR>==gi
 inoremap <C-A-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-A-j> :m '>+1<CR>gv=gv
 vnoremap <C-A-k> :m '<-2<CR>gv=gv
+
+" Debugger Vimspector
+nmap <Leader>dh <Plug>VimspectorStepOut
+nmap <Leader>dl <Plug>VimspectorStepInto
+nmap <Leader>dk <Plug>VimspectorRestart
+nmap <Leader>dj <Plug>VimspectorStepOver
+nnoremap <Leader>dd :call vimspector#Launch()<CR>
+nnoremap <Leader>dr :call vimspector#Reset()<CR>
+nnoremap <Leader>dc :call vimspector#Continue()<CR>
+nnoremap <Leader>db :call vimspector#ToggleBreakpoint()<CR>
+nnoremap <Leader>dB :call vimspector#ClearBreakpoints()<CR>
+" for normal mode - the word under the cursor
+nmap <Leader>di <Plug>VimspectorBalloonEval
+" for visual mode, the visually selected text
+xmap <Leader>di <Plug>VimspectorBalloonEval
+let g:vimspector_sign_priority = {
+\  'vimspectorBP': 100,
+\ }
+let g:vimspector_install_gadgets = ['CodeLLDB', 'vscode-js-debug']
 
 " Copy file path to clipboard
 nmap <leader>f :let @+ = @%<cr>
