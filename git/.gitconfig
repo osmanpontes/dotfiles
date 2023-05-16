@@ -11,5 +11,15 @@
 	lolad = !git lold --all
 	logp = log -p -M --stat --
 	logpr = log -p -M --follow --stat --
+	deltablame = -c core.pager=delta \
+		-c delta.light=false \
+		blame
+	deltadiff = -c core.pager=delta \
+		-c delta.light=false \
+		-c delta.navigate=true \
+		-c delta.conflictstyle=diff3 \
+		-c delta.colorMoved=default \
+		-c delta.side-by-side=true \
+		diff
 [init]
 	defaultBranch = main
