@@ -101,6 +101,9 @@ autocmd Filetype html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 " vim-commentary
 autocmd FileType sql setlocal commentstring=--\ %s
 
+" Cursor max right is the last character
+set virtualedit=none
+
 " Mappings
 let mapleader = "\<space>"
 inoremap jk <esc>
