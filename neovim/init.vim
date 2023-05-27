@@ -98,6 +98,9 @@ autocmd Filetype javascript setlocal expandtab tabstop=2 shiftwidth=2 softtabsto
 autocmd Filetype json setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 autocmd Filetype html setlocal expandtab tabstop=2 shiftwidth=2 softtabstop=2
 
+" vim-commentary
+autocmd FileType sql setlocal commentstring=--\ %s
+
 " Mappings
 let mapleader = "\<space>"
 inoremap jk <esc>
