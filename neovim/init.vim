@@ -196,13 +196,17 @@ nmap <leader>cqf <Plug>(coc-fix-current)
 nmap <leader>rn <Plug>(coc-rename)
 " Remap keys for applying refactor code actions
 nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+" Remap keys for applying refactor code actions
+nmap <silent> <leader>re <Plug>(coc-codeaction-refactor)
+xmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
+nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 " Run the Code Lens action on the current line
 " codelens not working yet
 " nmap <leader>cl <Plug>(coc-codelens-action)
 
 " NERDTree
 nnoremap <leader>n :NERDTreeToggle<cr>
-" nnoremap <leader>m :ALENext<cr>
+nnoremap <leader>N :NERDTreeFind<cr>
 
 " GitGutter
 nnoremap <leader>gg :GitGutter<cr>
