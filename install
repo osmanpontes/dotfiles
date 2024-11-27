@@ -53,6 +53,18 @@ if ! which ag ; then
     fi
 fi
 
+title ripgrep
+
+if ! which ripgrep ; then
+    if which yay ; then
+        yay -S ripgrep --noconfirm
+    fi
+
+    if which apt-get ; then
+        apt-get install ripgrep
+    fi
+fi
+
 title pgcli
 
 if ! which pgcli ; then
@@ -64,29 +76,6 @@ if ! which pgcli ; then
         apt-get install libpq-dev python-dev
         pip install pgcli
     fi
-fi
-
-title neovim
-
-if ! which nvim ; then
-    # Symlink
-    ln -sv ~/.dotfiles/neovim/ ~/.config/nvim
-
-    # Install Neovim
-    if which yay ; then
-        yay -S neovim --noconfirm
-    fi
-
-    if which apt-get ; then
-        apt-get install neovim
-    fi
-
-    # Install Plug - Vim plugin manager
-    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-    # Install plugins
-    nvim -c SourceInstall
 fi
 
 title tmux
@@ -106,6 +95,32 @@ if ! which tmux ; then
     fi
 fi
 
+title neovim
+
+if ! which nvim ; then
+    # Symlink
+    ln -sv ~/.dotfiles/neovim/ ~/.config/nvim
+
+    # Install Neovim
+    if which yay ; then
+        yay -S neovim --noconfirm
+        yay -S python-pynvim --noconfirm
+        yay -S ttf-inconsolata-go-nerd --noconfirm
+        yay -S bat --noconfirm
+    fi
+
+    if which apt-get ; then
+        apt-get install neovim
+    fi
+
+    # Install Plug - Vim plugin manager
+    curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+    # Install plugins
+    nvim -c SourceInstall
+fi
+
 title openvpn
 
 if ! which openvpn ; then
@@ -117,12 +132,7 @@ fi
 
 title nvm
 
-if ! which nvm ; then
-    if which yay ; then
-        yay -S nvm --noconfirm
-    fi
-fi
-#curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.2/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.5/install.sh | bash
 
 title docker
 
@@ -161,13 +171,13 @@ if ! which fish ; then
     fi
 
     # Install Oh My Fish
-    curl -L https://get.oh-my.fish | fish
+    curl https://raw.githubusercontent.com/oh-my-fish/oh-my-fish/master/bin/install | fish
 else
     # Install theme and font
     fish -c 'omf install bobthefish'
     fish -c 'omf theme bobthefish'
-    fish -c 'omf install fonts'
-    fish -c 'fonts install --powerline Inconsolata'
+    # fish -c 'omf install fonts'
+    # fish -c 'fonts install --powerline Inconsolata'
     # Install nvm plugin
     fish -c 'omf install nvm'
     # Set fish as default shell

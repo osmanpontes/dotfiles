@@ -1,25 +1,24 @@
 #!/bin/sh
 chsh -s $(which bash)
 # Clean tmux
-rm ~/.tmux.conf
+rm -f ~/.tmux.conf
 # Clean neovim
-rm ~/.config/nvim
+rm -f ~/.config/nvim
 rm -rf ~/.config/nvim/
 # Clen fish
-rm ~/.config/fish
+rm -f ~/.config/fish
 rm -rf ~/.config/fish/
 rm -rf ~/.config/omf
 rm -rf ~/.local/share/omf
-# Clean nvm
-rm -rf $NVM_DIR
 
-if which yaourt ; then
-    yaourt -Rs fish --noconfirm
-    yaourt -Rs neovim --noconfirm
-    yaourt -Rs tmux --noconfirm
-    yaourt -Rs the_silver_searcher --noconfirm
-    yaourt -Rs pgcli --noconfirm
-    yaourt -Rs python-pip --noconfirm
+if which yay ; then
+    yay -Rs nvm --noconfirm
+    yay -Rs fish --noconfirm
+    yay -Rs neovim --noconfirm
+    yay -Rs tmux --noconfirm
+    yay -Rs the_silver_searcher --noconfirm
+    yay -Rs pgcli --noconfirm
+    yay -Rs python-pip --noconfirm
 fi
 
 if which apt-get ; then
