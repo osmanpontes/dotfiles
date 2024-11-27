@@ -16,7 +16,9 @@ Plug 'ap/vim-css-color'
 " Lint Engine
 " Plug 'dense-analysis/ale'
 
+" Path navigator
 Plug 'scrooloose/nerdtree'
+
 Plug 'cohama/lexima.vim'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sleuth'
@@ -24,6 +26,9 @@ Plug 'tpope/vim-sleuth'
 " Auto complete
 " Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" AI complete
+Plug 'Exafunction/codeium.vim', { 'branch': 'main' }
 
 " Substitute keeping original case
 Plug 'tpope/vim-abolish'
@@ -79,7 +84,8 @@ call plug#end()
 " Colorscheme
 set background=dark
 colorscheme gruvbox
-hi Normal ctermbg=none
+highlight Normal ctermbg=none guibg=none
+highlight NonText ctermbg=none guibg=none
 
 " Settings
 set path+=**
@@ -113,6 +119,9 @@ nnoremap <leader>l :tabnext<cr>
 nnoremap <leader>h :tabprevious<cr>
 nnoremap <leader>t :tabnew<cr>
 nnoremap <leader>q :tabclose<cr>
+
+" Paste
+xnoremap <leader>p "_dP
 
 " Buffers
 nnoremap <leader>b :Buffers<cr>
@@ -204,22 +213,35 @@ nmap <silent> <leader>r  <Plug>(coc-codeaction-refactor-selected)
 " codelens not working yet
 " nmap <leader>cl <Plug>(coc-codelens-action)
 
+" Add (Neo)Vim's native statusline support
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
 " NERDTree
 nnoremap <leader>n :NERDTreeToggle<cr>
 nnoremap <leader>N :NERDTreeFind<cr>
 
 " GitGutter
+let g:gitgutter_map_keys = 0
 nnoremap <leader>gg :GitGutter<cr>
-nnoremap <leader>gn :GitGutterNextHunk<cr>
+nnoremap <leader>gp <Plug>(GitGutterPreviewHunk)
+nnoremap <leader>gs <Plug>(GitGutterStageHunk)
+nnoremap <leader>gu <Plug>(GitGutterUndoHunk)
+nmap ]c <Plug>(GitGutterNextHunk)
+nmap [c <Plug>(GitGutterPrevHunk)
 
 " Vim source files
 nnoremap <leader>ev :vsplit ~/.config/nvim/init.vim<cr>
 nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 
-" Search
-nnoremap <leader>a :execute "Ag" expand("<cword>")<cr>
+" fzf
+nnoremap <leader>a :execute "Rg" expand("<cword>")<cr>
 nnoremap <C-P> :Files<cr>
-nnoremap <C-F> :Ag<space>
+nnoremap <C-F> :RG<cr>
+" Defines usage of Rg not ignoring files (check option -uu)
+command! -nargs=* Rguu call fzf#vim#grep('rg --column --line-number --no-heading --color=always -uu '.shellescape(<q-args>), 1, fzf#vim#with_preview(), 0)
+
 
 " Change panes
 nnoremap <C-J> <C-W>j
@@ -258,8 +280,14 @@ let g:vimspector_install_gadgets = ['CodeLLDB', 'vscode-js-debug']
 nmap <leader>f :let @+ = @%<cr>
 nmap <leader>ff :let @+ = expand("%:p")<cr>
 
+" CocRestart
+nnoremap <Leader><Leader> :CocRestart<cr>
+
 " Save file
 nnoremap <C-S> :w<cr>
+nnoremap <M-w> :w<cr>
+inoremap <M-w> <Esc>:w<cr>
+nnoremap <M-q> :q<cr>
 
 inoremap <C-@> <C-P>
 
@@ -278,6 +306,9 @@ let g:UltiSnipsSnippetsDir = '~/.config/nvim/UltiSnips'
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" Codeium
+imap <script><silent><nowait><expr> <M-CR> codeium#Accept()
 
 " Deoplete configuration
 let g:deoplete#enable_at_startup = 1
