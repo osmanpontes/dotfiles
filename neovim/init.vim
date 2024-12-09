@@ -238,7 +238,7 @@ nnoremap <leader>sv :source ~/.config/nvim/init.vim<cr>
 " fzf
 nnoremap <leader>a :execute "Rg" expand("<cword>")<cr>
 nnoremap <C-P> :Files<cr>
-nnoremap <C-F> :RG<cr>
+nnoremap <C-F> :Rg<space>
 " Defines usage of Rg not ignoring files (check option -uu)
 command! -nargs=* Rguu call fzf#vim#grep('rg --column --line-number --no-heading --color=always -uu '.shellescape(<q-args>), 1, fzf#vim#with_preview(), 0)
 
