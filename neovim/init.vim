@@ -309,6 +309,7 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Codeium
 imap <script><silent><nowait><expr> <M-CR> codeium#Accept()
+let g:codeium_no_map_tab = 1
 
 " Deoplete configuration
 let g:deoplete#enable_at_startup = 1
